@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ismoilov Web Sayti</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #1e60a3; /* Ko'k rang */
+      z-index: 1000;
+      padding: 20px 0;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: center;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      padding: 15px 30px;
+      margin: 0 15px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+      position: relative;
+    }
+
+    .navbar a.active, .navbar a:hover {
+      background-color: #f39c12; /* Sariq rang */
+      color: white;
+      border-radius: 5px;
+      transform: scale(1.1);
+    }
+
+    .navbar a::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: #f39c12;
+      transform: scaleX(0);
+      transform-origin: bottom right;
+      transition: transform 0.3s ease;
+    }
+
+    .navbar a.active::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+
+    .hero {
+      height: 100vh;
+      background: url('your-image.jpg') no-repeat center center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      animation: fadeIn 2s ease-out;
+    }
+
+    .hero-content h1 {
+      font-size: 4rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #1e60a3; /* Ko'k rang */
+    }
+
+    .hero-content p {
+      font-size: 1.5rem;
+      margin-top: 10px;
+      color: #000; /* qora rangda */
+    }
+
+    .btn {
+      margin-top: 20px;
+      background-color: #f39c12; /* Sariq rang */
+      color: white;
+      padding: 12px 30px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 1.2rem;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #e67e22; /* Sariq rangni biroz qoraytirish */
+      transform: scale(1.1);
+    }
+
+    .section {
+      padding: 80px 0;
+      text-align: center;
+      animation: fadeIn 2s ease-out;
+      margin-top: 100px;
+    }
+
+    .section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+
+    .service-list {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 30px;
+      animation: slideIn 1s ease-out;
+    }
+
+    .service-item {
+      background-color: #fff;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      width: 250px;
+      text-align: center;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .service-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .service-item h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+
+    footer {
+      background-color: #1e60a3; /* Ko'k rang */
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    footer p {
+      font-size: 1rem;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideIn {
+      0% {
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .service-list {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .service-item {
+        margin-bottom: 30px;
+      }
+    }
+
+    /* Soat CSS */
+    .clock {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #1e60a3;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .clock:hover {
+      transform: scale(1.1);
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <a href="#home" id="home-link" class="active">Bosh Sahifa</a>
+      <a href="#about" id="about-link">Biz Haqimizda</a>
+      <a href="#services" id="services-link">Xizmatlar</a>
+      <a href="#contact" id="contact-link">Aloqa</a>
+    </div>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>Ismoilov Web Sayti</h1>
+      <p>Yangi dizayn va animatsiyalar bilan ajoyib tajriba!</p>
+      <a href="#about" class="btn">Biz Haqimizda</a>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <h2>Biz Haqimizda</h2>
+    <p>Ismoilov Web Sayti zamonaviy, intuitiv va foydalanuvchi do'stligi bo'lgan web dizayn yaratish uchun ishlaydi.</p>
+  </section>
+
+  <section id="services" class="section">
+    <h2>Xizmatlar</h2>
+    <div class="service-list">
+      <div class="service-item">
+        <h3>Web Dizayn</h3>
+        <p>Eng yaxshi va innovatsion dizaynlar.</p>
+      </div>
+      <div class="service-item">
+        <h3>SEO Optimallashtirish</h3>
+        <p>Saytingizni qidiruv tizimlarida yuqoriga olib chiqish.</p>
+      </div>
+      <div class="service-item">
+        <h3>Onlayn Do'konlar</h3>
+        <p>Onlayn biznesingizni yaratish va boshqarish.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <h2>Aloqa</h2>
+    <p>Biz bilan bog'lanish uchun elektron pochta orqali murojaat qiling.</p>
+    <p>Email: info@ismoilov.com</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 Ismoilov Web Sayti. Barcha huquqlar himoyalangan.</p>
+  </footer>
+
+  <!-- Zamonaviy soat -->
+  <div class="clock" id="clock"></div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock(); // Initial call to display time immediately
+  </script>
+</body>
+</html>
